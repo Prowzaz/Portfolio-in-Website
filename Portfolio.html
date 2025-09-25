@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio • Jirapat Taetawan</title>
+  <meta name="description" content="พอร์ตโฟลิโอสำหรับยื่นคณะวิทยาการคอมพิวเตอร์ – โชว์ผลงาน โครงการ ทักษะ และข้อมูลติดต่อ" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1220;        /* พื้นหลังเข้มแบบนุ่ม */
+      --bg-soft: #0f172a;   /* กล่อง/พื้นรอง */
+      --text: #e2e8f0;      /* สีตัวอักษรหลัก */
+      --muted: #94a3b8;     /* สีตัวอักษรรอง */
+      --line: #1f2937;      /* เส้นคั่น */
+      --brand: #06b6d4;     /* สีแบรนด์ น้ำเงินอมเขียว */
+      --brand-2: #22d3ee;   /* สีไลต์ */
+      --radius: 16px;       /* มุมโค้งมาตรฐาน */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: "Prompt", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 70% -10%, rgba(34,211,238,.1), transparent 60%),
+                  radial-gradient(900px 500px at 10% -20%, rgba(6,182,212,.12), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+
+    /* Header */
+    .header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.6); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .2px; }
+    .brand-badge { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 999px;
+      background: linear-gradient(45deg, var(--brand), var(--brand-2)); box-shadow: var(--shadow); font-size: 14px; }
+    .menu { display: none; gap: 8px; }
+    .menu a { padding: 10px 12px; border-radius: 12px; color: var(--muted); }
+    .menu a:hover { background: rgba(255,255,255,.06); color: var(--text); }
+    .cta { padding: 10px 14px; border-radius: 12px; background: linear-gradient(45deg, var(--brand), var(--brand-2)); color: #001018; font-weight: 600; }
+
+    /* Hero */
+    .hero { padding: 64px 0 24px; }
+    .hero-grid { display: grid; gap: 28px; align-items: center; }
+    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; font-size: 12px; color: var(--muted);
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); }
+    .h1 { font-size: clamp(28px, 4vw, 46px); line-height: 1.15; margin: 10px 0 8px; font-weight: 700; }
+    .highlight { color: var(--brand-2); }
+    .lead { color: var(--muted); max-width: 58ch; }
+    .actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+    .btn { padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); }
+    .btn:hover { background: rgba(255,255,255,.1); }
+
+    .hero-card { border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.06); border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); }
+    .hero-img { aspect-ratio: 4/3; width: 100%; object-fit: cover; opacity: .95; }
+    .hero-info { display: flex; gap: 12px; align-items: center; padding: 12px; border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(2,6,23,.6); }
+    .hero-info small { color: var(--muted); }
+
+    /* Section titles */
+    .section { padding: 48px 0; }
+    .section h2 { font-size: clamp(22px, 3vw, 32px); margin: 0 0 16px; }
+    .muted { color: var(--muted); }
+
+    /* Projects */
+    .grid { display: grid; gap: 16px; }
+    .card { border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.06); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .card-cover { position: relative; }
+    .badge-row { position: absolute; left: 12px; bottom: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .badge { padding: 4px 8px; border-radius: 999px; font-size: 12px; background: rgba(2,6,23,.65); border: 1px solid rgba(255,255,255,.1); color: #e5faff; }
+    .card-body { padding: 14px; }
+    .card-title { margin: 2px 0 6px; font-weight: 700; }
+    .link-row { display: flex; gap: 8px; padding: 0 14px 14px; }
+    .link { font-size: 14px; color: #a5e9ff; }
+
+    /* About */
+    .about { border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.04); border-radius: var(--radius); padding: 18px; }
+
+    /* Skills */
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip { padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); font-size: 13px; color: #dff7ff; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 22px; }
+    .timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,.1); }
+    .tl-item { position: relative; margin-bottom: 14px; }
+    .tl-item::before { content: ""; position: absolute; left: 0; top: 8px; width: 12px; height: 12px; background: linear-gradient(45deg, var(--brand), var(--brand-2)); border-radius: 50%; box-shadow: 0 0 0 3px rgba(34,211,238,.15); }
+    .tl-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 12px; }
+    .tl-when { font-weight: 700; color: #b9efff; }
+
+    /* Contact */
+    .contact { display: grid; gap: 16px; }
+    .panel { border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.04); border-radius: var(--radius); padding: 16px; }
+    .field { display: grid; gap: 6px; }
+    .input, .textarea { background: rgba(2,6,23,.6); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 10px 12px; color: var(--text); }
+    .textarea { min-height: 120px; resize: vertical; }
+    .submit { padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background: linear-gradient(45deg, var(--brand), var(--brand-2)); color: #001018; font-weight: 700; }
+
+    /* Footer */
+    .footer { border-top: 1px solid rgba(255,255,255,.08); padding: 24px 0; color: var(--muted); }
+
+    /* Back-to-top */
+    .top-btn { position: fixed; right: 20px; bottom: 20px; padding: 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.08); display: none; }
+    .top-btn.show { display: inline-grid; place-items: center; }
+
+    /* Responsive */
+    @media (min-width: 780px) {
+      .menu { display: flex; }
+      .hero-grid { grid-template-columns: 1.2fr 1fr; }
+      .grid { grid-template-columns: repeat(3, 1fr); }
+      .contact { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <a href="#home" class="brand">
+        <span class="brand-badge">★</span>
+        <span>Portfolio</span>
+      </a>
+      <nav class="menu">
+        <a href="#projects">ผลงาน</a>
+        <a href="#about">เกี่ยวกับ</a>
+        <a href="#skills">ทักษะ</a>
+        <a href="#timeline">ไทม์ไลน์</a>
+        <a href="#contact" class="cta">ดาวน์โหลดพอร์ต</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="pill"><span style="display:inline-block;width:8px;height:8px;border-radius:999px;background:#34d399"></span> กำลังสมัครคณะวิศวกรรมคอมพิวเตอร์</span>
+        <h1 class="h1">กระผม <span class="highlight">จีรพัฒน์ แต้ตะวัน</span></h1>
+        <p class="lead">คณะวิศวกรรมศาสตร์ สาขา วิศวกรรมคอมพิวเตอร์</p>
+        <p class="muted" style="margin-top:8px;max-width:62ch">แผนการเรียนห้องพิเศษวิทย์-คณิต</p>
+        <div class="actions">
+          <a class="btn" href="#projects">ดูผลงาน</a>
+          <a class="btn" href="mailto:you@example.com">ติดต่ออีเมล</a>
+        </div>
+        <div class="chips" style="margin-top:14px">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">Python</span>
+          <span class="chip">Unity 2D</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img class="hero-img" alt="cover" src="DSC_6569.jpg" />
+        <div class="hero-info">
+          <div>
+            <strong>Jirapat Taetawan, Maprow</strong><br />
+            <small>+66 99-185-1798 • jirapattaetawan555@example.com</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2>ผลงานเด่น</h2>
+      <div class="grid">
+        <!-- Project 1 -->
+        <article class="card">
+          <div class="card-cover">
+            <img alt="QuizCup" src="Quiz.png" />
+            <div class="badge-row">
+              <span class="badge">HTML</span>
+              <span class="badge">CSS</span>
+              <span class="badge">JavaScript</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">QuizCup — A‑Level Math Simulator</h3>
+            <p class="muted">เว็บจำลองข้อสอบ A-Level คณิตศาสตร์ 1 สุ่มโจทย์/จับเวลา/เฉลยอัตโนมัติ + Export คะแนน</p>
+          </div>
+          <div class="link-row">
+          </div>
+        </article>
+        <!-- Project 2 -->
+        <article class="card">
+          <div class="card-cover">
+            <img alt="Sci‑Fi Theme" src="bravo1.png" />
+            <div class="badge-row">
+              <span class="badge">HTML</span>
+              <span class="badge">CSS</span>
+              <span class="badge">JavaScript</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Bravo Machine Supply ,.LTD</h3>
+            <p class="muted">เขียนเว็ปไซต์ให้ บริษัท Bravo Machine Supply จำกัด</p>
+          </div>
+          <div class="link-row">
+            <a class="link" href="https://github.com/Prowzaz/brovo-for-portfolio">Source Code ↗</a>
+          </div>
+        </article>
+        <!-- Project 3 -->
+        <article class="card">
+          <div class="card-cover">
+            <img alt="2D Game" src="https://images.unsplash.com/photo-1556438064-2d7646166914?auto=format&fit=crop&w=1200&q=60" />
+            <div class="badge-row">
+              <span class="badge">Unity 2D</span>
+              <span class="badge">C#</span>
+              <span class="badge">Aseprite</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Top‑Down Shooter Prototype</h3>
+            <p class="muted">Coming soon...</p>
+          </div>
+          <div class="link-row">
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>เกี่ยวกับฉัน</h2>
+      <p class="about muted">เมื่อประมาณ 6 เดือนที่ผ่านมา ตัวกระผมได้เริ่มเรียนรู้การเขียน Python    การเขียนเว็ปไซต์, ทำโปรเจคเกม กระผมได้รับมอบหมายจากบริษัท Bravo Machine Supply จำกัด ให้เขียนเว็ปไซต์สำหรับนำไปใช้งานจริง และได้รู้ว่ากระผมมีความรู้สึกสนุกในการสร้างและการแก้ไขปัญหา รวมถึงทำให้กระผมได้เรียนทักษะการคิดแบบวิศวกรรม ไปปรับใช้ในชีวิตประจำวันอีกด้วย</p>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2>ทักษะ</h2>
+      <div class="chips">
+        <span class="chip">HTML</span>
+        <span class="chip">CSS</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">Python</span>
+        <span class="chip">Canva</span>
+        <span class="chip">Unity 2D</span>
+        <span class="chip">Git/GitHub</span>
+        <spam class="chip">Guitarist</spam>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section id="timeline" class="section">
+    <div class="container">
+      <h2>ไทม์ไลน์กิจกรรม</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-when">2025</div>
+            <div>เข้าร่วม TEP-TEPE Pre-Engineering Workshop 2025</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-when">2025</div>
+            <div>เข้าร่วมค่ายวิชาการ หลักสูตร วิทย์-คณิต ประจำปี 2568</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-when">2025</div>
+            <div>เข้าร่วมกิจกรรมเปิดบ้าน “Engineering SPARKS 2025”</div>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="container">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-when">2025</div>
+            <div>เข้าร่วม Samsung Solve For TMRW 2025</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-when">2025</div>
+            <div>เข้าร่วม ห้องจำลองวิศวะซอฟต์แวร์ โดย Onces Thailand</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-when">2025</div>
+            <div>อาสาสมัครมูลนิธิกระจกเงา</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-when">2025</div>
+            <div>ได้รับคัดเลือกเป็นสุภาพบุรุษ ธ.ค.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-when">2024</div>
+            <div>ตัวแทนถือธงสี</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-when">2024</div>
+            <div>จัดทำใบความรู้ รายวิชา ชีววิทยา</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container contact">
+      <div class="panel">
+        <h2>ติดต่อ</h2>
+        <p class="muted">สามารถติดต่อได้ทางอีเมลหรือฟอร์มนี้</p>
+        <p class="muted" style="margin-top:8px">jirapattaetawan555@example.com • +66 99‑185‑1798 • Pathum Thani, TH</p>
+      </div>
+      <form class="panel" onsubmit="event.preventDefault(); alert('ขอบคุณที่ติดต่อครับ!'); this.reset();">
+        <div class="field">
+          <label for="name">ชื่อ</label>
+          <input class="input" id="name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="email">อีเมล</label>
+          <input class="input" id="email" name="email" type="email" required />
+        </div>
+        <div class="field">
+          <label for="msg">ข้อความ</label>
+          <textarea class="textarea" id="msg" name="message" required></textarea>
+        </div>
+        <div style="display:flex; justify-content:end; margin-top:8px">
+          <button class="submit" type="submit">ส่งข้อความ</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+      <span>© <span id="year"></span> Jirapat Taetawan. สงวนลิขสิทธิ์</span>
+      <div style="display:flex;gap:10px">
+        <a href="#home">หน้าบนสุด</a>
+        <span style="opacity:.4">•</span>
+        <a href="#projects">ผลงาน</a>
+        <a href="#contact">ติดต่อ</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top button (แสดงเมื่อเลื่อนลง) -->
+  <button class="top-btn" id="toTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+  <script>
+    // ปีปัจจุบันในฟุตเตอร์
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // แสดงปุ่ม Back-to-top เมื่อเลื่อน
+    const topBtn = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 720) topBtn.classList.add('show');
+      else topBtn.classList.remove('show');
+    });
+  </script>
+</body>
+</html>
